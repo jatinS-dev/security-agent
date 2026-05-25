@@ -1,0 +1,28 @@
+{
+  "tools": [
+    {
+      "tool_name": "read_ticket",
+      "url": "http://127.0.0.1:9001/tools/read-ticket",
+      "method": "POST",
+      "body_mode": "envelope"
+    },
+    {
+      "tool_name": "send_email",
+      "url": "http://127.0.0.1:9001/tools/send-email",
+      "method": "POST",
+      "body_mode": "envelope"
+    },
+    {
+      "tool_name": "issue_refund",
+      "url": "http://127.0.0.1:9001/tools/issue-refund",
+      "method": "POST",
+      "body_mode": "envelope"
+    },
+    {
+      "tool_name": "export_customer_database",
+      "url": "http://127.0.0.1:9001/tools/export-customer-database",
+      "method": "POST",
+      "body_mode": "envelope"
+    }
+  ]
+}

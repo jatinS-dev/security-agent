@@ -1,0 +1,75 @@
+{
+  "name": "Default Supervisor Policy",
+  "version": "0.1.0",
+  "allowed_tools": [
+    "read_file",
+    "search_docs",
+    "issue_refund",
+    "run_tests",
+    "update_crm_record",
+    "write_patch",
+    "web_search"
+  ],
+  "blocked_tool_names": [
+    "send_email",
+    "delete_database",
+    "deploy_production",
+    "transfer_money"
+  ],
+  "tools_requiring_approval": [
+    "issue_refund",
+    "update_crm_record"
+  ],
+  "max_autonomous_amounts": {
+    "issue_refund": 250,
+    "transfer_money": 0
+  },
+  "tool_role_requirements": {
+    "issue_refund": [
+      "support_manager",
+      "finance_ops"
+    ],
+    "update_crm_record": [
+      "sales_ops",
+      "support_manager"
+    ]
+  },
+  "approval_tool_environments": {
+    "deploy_service": [
+      "production"
+    ]
+  },
+  "blocked_tool_environments": {
+    "delete_file": [
+      "production"
+    ]
+  },
+  "approval_routes": {
+    "issue_refund": [
+      "support-leads@example.com",
+      "finance-ops@example.com"
+    ],
+    "deploy_service": [
+      "sre-leads@example.com"
+    ]
+  },
+  "approval_expiration_minutes": 60,
+  "blocked_content_patterns": [
+    {
+      "id": "destructive-shell-command",
+      "description": "Blocks obviously destructive shell commands.",
+      "severity": "critical",
+      "action": "stop_agent",
+      "pattern": "(\\brm\\s+-rf\\s+/|\\bmkfs\\.|\\bdd\\s+if=|\\bgit\\s+reset\\s+--hard\\b|\\bDROP\\s+DATABASE\\b)"
+    },
+    {
+      "id": "secret-disclosure",
+      "description": "Blocks accidental secret disclosure.",
+      "severity": "critical",
+      "action": "stop_agent",
+      "pattern": "\\b(sk-[A-Za-z0-9_-]{20,}|AKIA[0-9A-Z]{16}|-----BEGIN\\s+(RSA|OPENSSH|EC)\\s+PRIVATE\\s+KEY-----)\\b"
+    }
+  ],
+  "completion_requires_artifacts": true,
+  "factual_claims_require_sources": true
+}

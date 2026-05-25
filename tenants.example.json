@@ -1,0 +1,17 @@
+{
+  "tenants": [
+    {
+      "tenant_id": "acme",
+      "policy_path": "policies/default_policy.json",
+      "audit_path": "logs/acme/audit.jsonl",
+      "approvals_path": "logs/acme/approvals.jsonl",
+      "registry_path": "agents/example_registry.json"
+    },
+    {
+      "tenant_id": "devops",
+      "policy_path": "policies/examples/devops_policy.json",
+      "audit_path": "logs/devops/audit.jsonl",
+      "approvals_path": "logs/devops/approvals.jsonl"
+    }
+  ]
+}

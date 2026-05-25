@@ -1,0 +1,19 @@
+{
+  "name": "Unsupported claim is blocked",
+  "event": {
+    "agent_id": "research-agent-1",
+    "event_type": "result",
+    "content": "Dependency has no critical vulnerabilities.",
+    "metadata": {
+      "claims": [
+        "Dependency has no critical vulnerabilities."
+      ],
+      "sources": [],
+      "artifacts": [
+        "report.md"
+      ]
+    }
+  },
+  "expected_decision": "block"
+}
+

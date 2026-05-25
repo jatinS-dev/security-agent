@@ -1,0 +1,52 @@
+{
+  "name": "Finance Operations Agent Policy",
+  "version": "0.1.0",
+  "allowed_tools": [
+    "read_invoice",
+    "search_vendor_records",
+    "create_payment_draft",
+    "transfer_money",
+    "update_vendor_record"
+  ],
+  "blocked_tool_names": [
+    "delete_vendor",
+    "disable_payment_controls"
+  ],
+  "tools_requiring_approval": [
+    "transfer_money",
+    "update_vendor_record"
+  ],
+  "max_autonomous_amounts": {
+    "transfer_money": 0
+  },
+  "tool_role_requirements": {
+    "transfer_money": [
+      "finance_manager"
+    ],
+    "update_vendor_record": [
+      "finance_ops",
+      "finance_manager"
+    ]
+  },
+  "approval_tool_environments": {},
+  "blocked_tool_environments": {},
+  "blocked_content_patterns": [
+    {
+      "id": "bank-account-disclosure",
+      "description": "Blocks possible bank account disclosure.",
+      "severity": "critical",
+      "action": "stop_agent",
+      "pattern": "\\b\\d{8,17}\\b"
+    },
+    {
+      "id": "secret-disclosure",
+      "description": "Blocks accidental secret disclosure.",
+      "severity": "critical",
+      "action": "stop_agent",
+      "pattern": "\\b(sk-[A-Za-z0-9_-]{20,}|AKIA[0-9A-Z]{16}|-----BEGIN\\s+(RSA|OPENSSH|EC)\\s+PRIVATE\\s+KEY-----)\\b"
+    }
+  ],
+  "completion_requires_artifacts": true,
+  "factual_claims_require_sources": true
+}
+

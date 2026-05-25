@@ -1,0 +1,14 @@
+{
+  "name": "Destructive command is blocked",
+  "event": {
+    "agent_id": "devops-agent-2",
+    "event_type": "tool_call",
+    "content": "Run cleanup",
+    "metadata": {
+      "tool_name": "read_file",
+      "command": "rm -rf /"
+    }
+  },
+  "expected_decision": "block"
+}
+

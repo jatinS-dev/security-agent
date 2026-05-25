@@ -1,0 +1,8 @@
+{
+  "production": {
+    "deployments": "Production deploys require approval from an admin before execution."
+  },
+  "secrets": {
+    "handling": "API key secrets are forbidden in agent messages and final answers."
+  }
+}

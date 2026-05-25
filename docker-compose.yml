@@ -1,0 +1,43 @@
+services:
+  sentient:
+    build: .
+    command:
+      - sentient-api
+      - --policy
+      - policies/default_policy.json
+      - --host
+      - 0.0.0.0
+      - --port
+      - "8080"
+      - --api-key
+      - ${SENTIENT_API_KEY:-dev-key}
+      - --rate-limit-per-minute
+      - ${SENTIENT_RATE_LIMIT_PER_MINUTE:-120}
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./logs:/app/logs
+      - ./policies:/app/policies:ro
+      - ./agents:/app/agents:ro
+    environment:
+      SENTIENT_POSTGRES_DSN: postgresql://sentient:sentient@postgres:5432/sentient
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: sentient
+      POSTGRES_PASSWORD: sentient
+      POSTGRES_DB: sentient
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sentient -d sentient"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    volumes:
+      - sentient-postgres:/var/lib/postgresql/data
+
+volumes:
+  sentient-postgres:

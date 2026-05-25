@@ -1,0 +1,19 @@
+{
+  "name": "Production deploy blocked by default policy",
+  "event": {
+    "agent_id": "devops-agent-2",
+    "task_id": "incident-77",
+    "event_type": "tool_call",
+    "content": "Deploy service",
+    "metadata": {
+      "tool_name": "deploy_production",
+      "agent_role": "sre",
+      "tool_args": {
+        "service": "payments",
+        "environment": "production"
+      }
+    }
+  },
+  "expected_decision": "block"
+}
+

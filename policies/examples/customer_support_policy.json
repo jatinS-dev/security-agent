@@ -1,0 +1,55 @@
+{
+  "name": "Customer Support Agent Policy",
+  "version": "0.1.0",
+  "allowed_tools": [
+    "read_ticket",
+    "search_knowledge_base",
+    "draft_email",
+    "send_email",
+    "issue_refund",
+    "update_crm_record"
+  ],
+  "blocked_tool_names": [
+    "delete_customer",
+    "export_customer_database",
+    "change_billing_plan"
+  ],
+  "tools_requiring_approval": [
+    "send_email",
+    "update_crm_record"
+  ],
+  "max_autonomous_amounts": {
+    "issue_refund": 100
+  },
+  "tool_role_requirements": {
+    "issue_refund": [
+      "support_manager",
+      "finance_ops"
+    ],
+    "update_crm_record": [
+      "support_manager",
+      "sales_ops"
+    ]
+  },
+  "approval_tool_environments": {},
+  "blocked_tool_environments": {},
+  "blocked_content_patterns": [
+    {
+      "id": "payment-card-disclosure",
+      "description": "Blocks possible payment card disclosure.",
+      "severity": "critical",
+      "action": "stop_agent",
+      "pattern": "\\b(?:\\d[ -]*?){13,16}\\b"
+    },
+    {
+      "id": "secret-disclosure",
+      "description": "Blocks accidental secret disclosure.",
+      "severity": "critical",
+      "action": "stop_agent",
+      "pattern": "\\b(sk-[A-Za-z0-9_-]{20,}|AKIA[0-9A-Z]{16}|-----BEGIN\\s+(RSA|OPENSSH|EC)\\s+PRIVATE\\s+KEY-----)\\b"
+    }
+  ],
+  "completion_requires_artifacts": true,
+  "factual_claims_require_sources": true
+}
+

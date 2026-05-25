@@ -1,0 +1,40 @@
+{
+  "agents": [
+    {
+      "agent_id": "support-agent-7",
+      "role": "support_manager",
+      "owner": "support-ops@example.com",
+      "runtime": "openai-agents",
+      "risk_level": "medium",
+      "allowed_tasks": [
+        "ticket-1842"
+      ]
+    },
+    {
+      "agent_id": "devops-agent-2",
+      "role": "sre",
+      "owner": "platform@example.com",
+      "runtime": "langgraph",
+      "risk_level": "high",
+      "allowed_tasks": [
+        "incident-77"
+      ]
+    },
+    {
+      "agent_id": "research-agent-1",
+      "role": "researcher",
+      "owner": "ai-platform@example.com",
+      "runtime": "openai-agents",
+      "risk_level": "medium",
+      "allowed_tasks": []
+    },
+    {
+      "agent_id": "docs-agent",
+      "role": "technical_writer",
+      "owner": "docs@example.com",
+      "runtime": "python",
+      "risk_level": "low",
+      "allowed_tasks": []
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "name": "First Customer Support Agent Policy",
+  "version": "0.1.0",
+  "allowed_tools": [
+    "read_ticket",
+    "search_knowledge_base",
+    "draft_email",
+    "send_email",
+    "issue_refund",
+    "export_customer_database"
+  ],
+  "blocked_tool_names": [
+    "export_customer_database"
+  ],
+  "tools_requiring_approval": [
+    "send_email"
+  ],
+  "max_autonomous_amounts": {
+    "issue_refund": 100
+  },
+  "tool_role_requirements": {
+    "issue_refund": [
+      "support_manager"
+    ]
+  },
+  "approval_routes": {
+    "send_email": [
+      "support-lead@example.com"
+    ],
+    "issue_refund": [
+      "finance@example.com"
+    ]
+  },
+  "approval_expiration_minutes": 60,
+  "blocked_content_patterns": [
+    {
+      "id": "secret-disclosure",
+      "description": "Blocks accidental secret disclosure.",
+      "severity": "critical",
+      "action": "stop_agent",
+      "pattern": "sk-[A-Za-z0-9_-]+|api[_ -]?key|secret"
+    },
+    {
+      "id": "payment-card-disclosure",
+      "description": "Blocks possible payment card disclosure.",
+      "severity": "critical",
+      "action": "stop_agent",
+      "pattern": "\\b(?:\\d[ -]*?){13,19}\\b"
+    }
+  ],
+  "completion_requires_artifacts": true,
+  "factual_claims_require_sources": true
+}

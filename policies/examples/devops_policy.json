@@ -1,0 +1,62 @@
+{
+  "name": "DevOps Agent Policy",
+  "version": "0.1.0",
+  "allowed_tools": [
+    "read_logs",
+    "query_metrics",
+    "restart_service",
+    "deploy_service",
+    "create_incident_report",
+    "run_tests"
+  ],
+  "blocked_tool_names": [
+    "delete_database",
+    "rotate_prod_keys",
+    "disable_audit_logs"
+  ],
+  "tools_requiring_approval": [
+    "restart_service"
+  ],
+  "max_autonomous_amounts": {},
+  "tool_role_requirements": {
+    "deploy_service": [
+      "release_manager",
+      "sre_lead"
+    ],
+    "restart_service": [
+      "sre",
+      "sre_lead"
+    ]
+  },
+  "approval_tool_environments": {
+    "deploy_service": [
+      "production"
+    ],
+    "restart_service": [
+      "production"
+    ]
+  },
+  "blocked_tool_environments": {
+    "delete_file": [
+      "production"
+    ]
+  },
+  "blocked_content_patterns": [
+    {
+      "id": "destructive-shell-command",
+      "description": "Blocks obviously destructive shell commands.",
+      "severity": "critical",
+      "action": "stop_agent",
+      "pattern": "(\\brm\\s+-rf\\s+/|\\bmkfs\\.|\\bdd\\s+if=|\\bgit\\s+reset\\s+--hard\\b|\\bDROP\\s+DATABASE\\b)"
+    },
+    {
+      "id": "secret-disclosure",
+      "description": "Blocks accidental secret disclosure.",
+      "severity": "critical",
+      "action": "stop_agent",
+      "pattern": "\\b(sk-[A-Za-z0-9_-]{20,}|AKIA[0-9A-Z]{16}|-----BEGIN\\s+(RSA|OPENSSH|EC)\\s+PRIVATE\\s+KEY-----)\\b"
+    }
+  ],
+  "completion_requires_artifacts": true,
+  "factual_claims_require_sources": true
+}

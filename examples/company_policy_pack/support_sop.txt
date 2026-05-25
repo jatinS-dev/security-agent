@@ -1,0 +1,5 @@
+Support agents may search the knowledge base and read customer tickets.
+
+Send email actions require approval before delivery to customers.
+
+Customer claims should cite the relevant support policy or knowledge base article.
