@@ -39,6 +39,8 @@ The first product direction is documented in [docs/mvp-strategy.md](docs/mvp-str
 
 The short version: this project should become a policy enforcement layer that sits between production AI agents and the tools they use. The first MVP should monitor and control tool calls before execution, returning `ALLOW`, `BLOCK`, or `REQUIRE_HUMAN_APPROVAL`.
 
+The Cloudflare-style product roadmap is captured in [docs/cloudflare-for-ai-agents-roadmap.md](docs/cloudflare-for-ai-agents-roadmap.md).
+
 ## Example Policies
 
 Example policy files live in [policies/examples](policies/examples):
